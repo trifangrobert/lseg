@@ -1,0 +1,438 @@
+{
+  "edges": [
+    {
+      "id": "e-user-ui",
+      "label": "Input",
+      "source": "user",
+      "target": "ui",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-ui-chat",
+      "source": "ui",
+      "target": "chat",
+      "sourceHandle": "left",
+      "targetHandle": "right-t"
+    },
+    {
+      "id": "e-ui-sidebar",
+      "source": "ui",
+      "target": "sidebar",
+      "sourceHandle": "left",
+      "targetHandle": "right-t"
+    },
+    {
+      "id": "e-ui-canvas",
+      "source": "ui",
+      "target": "canvas",
+      "sourceHandle": "right",
+      "targetHandle": "left-t"
+    },
+    {
+      "id": "e-ui-editor",
+      "source": "ui",
+      "target": "editor",
+      "sourceHandle": "right",
+      "targetHandle": "left-t"
+    },
+    {
+      "id": "e-ui-s1",
+      "label": "User Request",
+      "source": "ui",
+      "target": "s1",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s1-s2",
+      "source": "s1",
+      "target": "s2",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s2-s3",
+      "label": "ceva",
+      "source": "s2",
+      "target": "s3",
+      "selected": false,
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s3-fb",
+      "source": "s3",
+      "target": "fallback",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-fb-yes",
+      "label": "Fail",
+      "source": "fallback",
+      "target": "fallback_handler",
+      "sourceHandle": "right",
+      "targetHandle": "left-t"
+    },
+    {
+      "id": "e-fb-retry",
+      "label": "Retry",
+      "source": "fallback_handler",
+      "target": "s3",
+      "sourceHandle": "top",
+      "targetHandle": "right-t"
+    },
+    {
+      "id": "e-fb-no",
+      "label": "OK",
+      "source": "fallback",
+      "target": "s4",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s4-s5",
+      "source": "s4",
+      "target": "s5",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s5-s6",
+      "source": "s5",
+      "target": "s6",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s6-s7",
+      "source": "s6",
+      "target": "s7",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s7-json",
+      "source": "s7",
+      "target": "out_json",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s7-svg",
+      "source": "s7",
+      "target": "out_svg",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-s7-png",
+      "source": "s7",
+      "target": "out_png",
+      "sourceHandle": "bottom",
+      "targetHandle": "top-t"
+    },
+    {
+      "id": "e-canvas-s5",
+      "label": "Render feedback",
+      "source": "canvas",
+      "target": "s5",
+      "sourceHandle": "bottom",
+      "targetHandle": "right-t"
+    },
+    {
+      "id": "e-editor-s4",
+      "label": "Manual edits",
+      "source": "editor",
+      "target": "s4",
+      "sourceHandle": "bottom",
+      "targetHandle": "right-t"
+    },
+    {
+      "id": "xy-edge__s4left-s5left",
+      "source": "s4",
+      "target": "s5",
+      "sourceHandle": "left",
+      "targetHandle": "left"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "user",
+      "data": {
+        "label": "User"
+      },
+      "type": "actor",
+      "measured": {
+        "width": 70,
+        "height": 90
+      },
+      "position": {
+        "x": 500,
+        "y": 40
+      }
+    },
+    {
+      "id": "ui",
+      "data": {
+        "label": "Streamlit UI"
+      },
+      "type": "rectangle",
+      "measured": {
+        "width": 130,
+        "height": 38
+      },
+      "position": {
+        "x": 420,
+        "y": 180
+      }
+    },
+    {
+      "id": "chat",
+      "data": {
+        "label": "Chat Panel"
+      },
+      "type": "io",
+      "measured": {
+        "width": 130,
+        "height": 41
+      },
+      "position": {
+        "x": 160,
+        "y": 150
+      }
+    },
+    {
+      "id": "sidebar",
+      "data": {
+        "label": "Settings Sidebar"
+      },
+      "type": "hexagon",
+      "measured": {
+        "width": 130,
+        "height": 60
+      },
+      "position": {
+        "x": 160,
+        "y": 280
+      }
+    },
+    {
+      "id": "canvas",
+      "data": {
+        "label": "Interactive Canvas"
+      },
+      "type": "trapezoid",
+      "measured": {
+        "width": 158,
+        "height": 41
+      },
+      "position": {
+        "x": 720,
+        "y": 150
+      }
+    },
+    {
+      "id": "editor",
+      "data": {
+        "label": "Node / Edge Editor"
+      },
+      "type": "trapezoid",
+      "measured": {
+        "width": 159,
+        "height": 41
+      },
+      "position": {
+        "x": 720,
+        "y": 280
+      }
+    },
+    {
+      "id": "s1",
+      "data": {
+        "label": "① Request Parsing"
+      },
+      "type": "rectangle",
+      "measured": {
+        "width": 152,
+        "height": 38
+      },
+      "position": {
+        "x": 420,
+        "y": 380
+      }
+    },
+    {
+      "id": "s2",
+      "data": {
+        "label": "② Prompt Planning",
+        "colorPreset": "emerald"
+      },
+      "type": "rectangle",
+      "measured": {
+        "width": 153,
+        "height": 38
+      },
+      "position": {
+        "x": 420,
+        "y": 530
+      },
+      "selected": false
+    },
+    {
+      "id": "s3",
+      "data": {
+        "label": "③ LLM-Based JSON\nSpec Generation"
+      },
+      "type": "tool",
+      "measured": {
+        "width": 257,
+        "height": 38
+      },
+      "position": {
+        "x": 420,
+        "y": 680
+      },
+      "selected": false
+    },
+    {
+      "id": "fallback",
+      "data": {
+        "label": "Fallback\nMechanism?"
+      },
+      "type": "diamond",
+      "measured": {
+        "width": 130,
+        "height": 90
+      },
+      "position": {
+        "x": 420,
+        "y": 840
+      },
+      "selected": false
+    },
+    {
+      "id": "fallback_handler",
+      "data": {
+        "label": "Fallback Handler\n(Retry / Default Spec)"
+      },
+      "type": "rectangle",
+      "dragging": false,
+      "measured": {
+        "width": 268,
+        "height": 38
+      },
+      "position": {
+        "x": 794,
+        "y": 962
+      },
+      "selected": false
+    },
+    {
+      "id": "s4",
+      "data": {
+        "label": "④ Schema Validation\n& Auto-Repair"
+      },
+      "type": "classifier",
+      "measured": {
+        "width": 248,
+        "height": 38
+      },
+      "position": {
+        "x": 420,
+        "y": 1000
+      }
+    },
+    {
+      "id": "s5",
+      "data": {
+        "label": "⑤ Render to\nvis.js Graph Format"
+      },
+      "type": "rectangle",
+      "measured": {
+        "width": 228,
+        "height": 38
+      },
+      "position": {
+        "x": 420,
+        "y": 1150
+      }
+    },
+    {
+      "id": "s6",
+      "data": {
+        "label": "⑥ Style\nPostprocessing"
+      },
+      "type": "hexagon",
+      "measured": {
+        "width": 130,
+        "height": 60
+      },
+      "position": {
+        "x": 420,
+        "y": 1300
+      }
+    },
+    {
+      "id": "s7",
+      "data": {
+        "label": "⑦ Export Stage"
+      },
+      "type": "rectangle",
+      "measured": {
+        "width": 133,
+        "height": 38
+      },
+      "position": {
+        "x": 420,
+        "y": 1450
+      }
+    },
+    {
+      "id": "out_json",
+      "data": {
+        "label": "JSON Output"
+      },
+      "type": "document",
+      "measured": {
+        "width": 130,
+        "height": 75
+      },
+      "position": {
+        "x": 200,
+        "y": 1600
+      }
+    },
+    {
+      "id": "out_svg",
+      "data": {
+        "label": "SVG Output"
+      },
+      "type": "document",
+      "measured": {
+        "width": 130,
+        "height": 75
+      },
+      "position": {
+        "x": 420,
+        "y": 1600
+      }
+    },
+    {
+      "id": "out_png",
+      "data": {
+        "label": "PNG Output"
+      },
+      "type": "document",
+      "measured": {
+        "width": 130,
+        "height": 75
+      },
+      "position": {
+        "x": 640,
+        "y": 1600
+      }
+    }
+  ]
+}
