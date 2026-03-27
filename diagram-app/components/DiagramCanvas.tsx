@@ -661,27 +661,23 @@ function ExportControls({ diagramState, canvasRef }: { diagramState: DiagramStat
     const el = canvasRef.current?.querySelector(".react-flow__renderer") as HTMLElement | null;
     if (!el) return;
 
-    // html-to-image wraps HTML in a foreignObject SVG, breaking url(#marker-id) references.
-    // Fix: inline each referenced marker as a self-contained SVG data URI before capture.
-    const edgesSvg = el.querySelector("svg");
-    const defsEl = edgesSvg?.querySelector("defs");
-    const markerPaths = edgesSvg ? [...edgesSvg.querySelectorAll<Element>("[marker-end]")] : [];
-    const saved: { el: Element; value: string }[] = [];
-
-    if (defsEl && markerPaths.length) {
-      const serializer = new XMLSerializer();
-      markerPaths.forEach((path) => {
-        const raw = path.getAttribute("marker-end") ?? "";
-        const match = raw.match(/url\(["']?#(.+?)["']?\)/);
-        if (!match) return;
-        const marker = defsEl.querySelector(`#${CSS.escape(match[1])}`);
-        if (!marker) return;
-        saved.push({ el: path, value: raw });
-        const svgWrap = `<svg xmlns="http://www.w3.org/2000/svg"><defs>${serializer.serializeToString(marker)}</defs></svg>`;
-        const uri = `url("data:image/svg+xml,${encodeURIComponent(svgWrap)}#${match[1]}")`;
-        path.setAttribute("marker-end", uri);
+    // html-to-image serializes the DOM into a foreignObject SVG.
+    // CSS rules don't survive this serialization, so SVG edge paths
+    // (which get their stroke from .react-flow__edge-path CSS) become invisible.
+    // Fix: temporarily set stroke as inline SVG attributes before capture.
+    const edgePaths = el.querySelectorAll<SVGPathElement>(".react-flow__edge-path");
+    const saved: { el: SVGPathElement; stroke: string | null; strokeWidth: string | null; fill: string | null }[] = [];
+    edgePaths.forEach((p) => {
+      saved.push({
+        el: p,
+        stroke: p.getAttribute("stroke"),
+        strokeWidth: p.getAttribute("stroke-width"),
+        fill: p.getAttribute("fill"),
       });
-    }
+      p.setAttribute("stroke", "#94a3b8");
+      p.setAttribute("stroke-width", "1.5");
+      p.setAttribute("fill", "none");
+    });
 
     try {
       const dataUrl = await toPng(el, {
@@ -691,7 +687,11 @@ function ExportControls({ diagramState, canvasRef }: { diagramState: DiagramStat
       });
       const a = document.createElement("a"); a.href = dataUrl; a.download = "diagram.png"; a.click();
     } finally {
-      saved.forEach(({ el: path, value }) => path.setAttribute("marker-end", value));
+      saved.forEach(({ el: p, stroke, strokeWidth, fill }) => {
+        if (stroke === null) p.removeAttribute("stroke"); else p.setAttribute("stroke", stroke);
+        if (strokeWidth === null) p.removeAttribute("stroke-width"); else p.setAttribute("stroke-width", strokeWidth);
+        if (fill === null) p.removeAttribute("fill"); else p.setAttribute("fill", fill);
+      });
     }
     setOpen(false);
   }
