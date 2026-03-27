@@ -1,0 +1,9 @@
+- convert from natural language to graph representation
+- check typos
+- prompt engineering (make similar nodes with the same color)
+
+also allow me to export the resulting schema as a svg or as a json
+
+  if a json, maybe when we start a chat we can also load that json and continue from there
+
+  is the llm able to understand a diagram received as a json?

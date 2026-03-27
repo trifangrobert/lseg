@@ -1,0 +1,113 @@
+{
+  "nodes": [
+    {
+      "id": "user",
+      "position": {
+        "x": 50,
+        "y": 200
+      },
+      "data": {
+        "label": "User"
+      },
+      "type": "actor",
+      "measured": {
+        "width": 70,
+        "height": 90
+      }
+    },
+    {
+      "id": "prompt_guardrail",
+      "position": {
+        "x": 250,
+        "y": 185
+      },
+      "data": {
+        "label": "Prompt Guardrail"
+      },
+      "type": "classifier",
+      "measured": {
+        "width": 141,
+        "height": 38
+      }
+    },
+    {
+      "id": "llm_gateway",
+      "position": {
+        "x": 475,
+        "y": 185
+      },
+      "data": {
+        "label": "LLM API Call\n(Gateway)"
+      },
+      "type": "tool",
+      "measured": {
+        "width": 175,
+        "height": 38
+      }
+    },
+    {
+      "id": "output_guardrail",
+      "position": {
+        "x": 700,
+        "y": 185
+      },
+      "data": {
+        "label": "Output Guardrail"
+      },
+      "type": "classifier",
+      "measured": {
+        "width": 139,
+        "height": 38
+      }
+    },
+    {
+      "id": "user_out",
+      "position": {
+        "x": 925,
+        "y": 200
+      },
+      "data": {
+        "label": "User"
+      },
+      "type": "actor",
+      "measured": {
+        "width": 70,
+        "height": 90
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "user",
+      "target": "prompt_guardrail",
+      "sourceHandle": "right",
+      "targetHandle": "left-t",
+      "label": "User Query"
+    },
+    {
+      "id": "e2",
+      "source": "prompt_guardrail",
+      "target": "llm_gateway",
+      "sourceHandle": "right",
+      "targetHandle": "left-t",
+      "label": "Approved"
+    },
+    {
+      "id": "e3",
+      "source": "llm_gateway",
+      "target": "output_guardrail",
+      "sourceHandle": "right",
+      "targetHandle": "left-t",
+      "label": "Response"
+    },
+    {
+      "id": "e4",
+      "source": "output_guardrail",
+      "target": "user_out",
+      "sourceHandle": "right",
+      "targetHandle": "left-t",
+      "label": "Safe Output"
+    }
+  ]
+}
